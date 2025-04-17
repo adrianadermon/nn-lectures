@@ -4,7 +4,7 @@
  * By Adrian Adermon
  */
 @import url(./fonts/Raleway/raleway.css);
-@import url(./fonts/Monserrat/monserrat.css);
+@import url(./fonts/Montserrat/montserrat.css);
 section.has-dark-background, section.has-dark-background h1, section.has-dark-background h2, section.has-dark-background h3, section.has-dark-background h4, section.has-dark-background h5, section.has-dark-background h6 {
   color: #fff;
 }
@@ -19,7 +19,7 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
   --r-main-color: #222;
   --r-block-margin: 20px;
   --r-heading-margin: 0 0 20px 0;
-  --r-heading-font: Monserrat, Helvetica, sans-serif;
+  --r-heading-font: Montserrat, Helvetica, sans-serif;
   --r-heading-color: #222;
   --r-heading-line-height: 1.2;
   --r-heading-letter-spacing: normal;

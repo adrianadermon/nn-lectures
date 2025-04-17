@@ -176,24 +176,22 @@ board_output.addChild(board_clip_h2);
 board_output.addChild(board_scale_h2);
 
 // Sliders
-const sleft = -2,
-        sright = 3,
-        t0h = 3,
-        t1h = 2,
-        p0h = 3,
-        p1h = 2,
-        p2h = 1,
-        p3h = 0,
+const sleft = -1.5,
+        sright = 2.5,
+        w0h = 3,
+        w1h = 2,
+        b0h = 3,
+        b1h = 2,
+        b2h = 1,
         srange = [-3, 1, 3];
 
-const t0param = [[sleft, t0h], [sright, t0h], srange],
-        t1param = [[sleft, t1h], [sright, t1h], srange],
-        p0param = [[sleft, p0h], [sright, p0h], srange],
-        p1param = [[sleft, p1h], [sright, p1h], srange],
-        p2param = [[sleft, p2h], [sright, p2h], srange],
-        p3param = [[sleft, p3h], [sright, p3h], srange];
+const t0param = [[sleft, w0h], [sright, w0h], srange],
+        t1param = [[sleft, w1h], [sright, w1h], srange],
+        p0param = [[sleft, b0h], [sright, b0h], srange],
+        p1param = [[sleft, b1h], [sright, b1h], srange],
+        p2param = [[sleft, b2h], [sright, b2h], srange];
 
-const satts = { withTicks: false }
+const satts = { withTicks: false, digits: 1 }
 
 const p0 = board_output.create('slider',
         p0param,
@@ -201,33 +199,33 @@ const p0 = board_output.create('slider',
             name: '\\(\\beta_0\\)',
             ...satts
         }),
-        p1 = board_output.create('slider',
+        b1 = board_output.create('slider',
                 p1param,
                 {
                     name: '\\(\\beta_1\\)',
                     ...satts
                 }),
-        p2 = board_output.create('slider',
+        b2 = board_output.create('slider',
                 p2param,
                 {
                     name: '\\(\\beta_2\\)',
                     ...satts
                 }),
 
-        t10 = board_h1.create('slider',
+        w10 = board_h1.create('slider',
                 t0param,
                 {
                     name: '\\(w_{10}\\)',
                     ...satts
                 }),
-        t11 = board_h1.create('slider',
+        w11 = board_h1.create('slider',
                 t1param,
                 {
                     name: '\\(w_{11}\\)',
                     ...satts
                 }),
 
-        t20 = board_h2.create('slider',
+        w20 = board_h2.create('slider',
                 t0param,
                 {
                     name: '\\(w_{20}\\)',
@@ -294,13 +292,13 @@ function setActivationFunction(event) {
         }
 };
 
-function lin_h1(x) { return t10.Value() + t11.Value() * x };
+function lin_h1(x) { return w10.Value() + w11.Value() * x };
 function clip_h1(x) { return activation(lin_h1(x)) };
-function scale_h1(x) { return p1.Value() * clip_h1(x) };
+function scale_h1(x) { return b1.Value() * clip_h1(x) };
 
-function lin_h2(x) { return t20.Value() + t21.Value() * x };
+function lin_h2(x) { return w20.Value() + t21.Value() * x };
 function clip_h2(x) { return activation(lin_h2(x)) };
-function scale_h2(x) { return p2.Value() * clip_h2(x) };
+function scale_h2(x) { return b2.Value() * clip_h2(x) };
 
 
 function lin_output(x) {

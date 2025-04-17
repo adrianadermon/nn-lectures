@@ -1,7 +1,8 @@
 .container {
     display: grid;
     align-items: center;
-    grid-template-columns: 5fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr;
+    justify-items: center;
+    grid-template-columns: 10fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr;
 }
 
 .jxgbox {
@@ -12,7 +13,7 @@
 }
       
 .arrows {
-    font-size: 3vw;
+    font-size: 2vw;
 }
       /* .roboto-<uniquifier> { */
       /*     font-family: "Roboto", serif; */
@@ -23,13 +24,14 @@
       /*         "wdth" 100; */
       /* } */
 .controls {
-    width: 95%;
+    width: 90%;
     aspect-ratio: 1 / 1;
     border-width: 0px;
 }
 
 .graph {
-    width: 95%px;
+    width: 95%;
+    max-width: 95%;
     aspect-ratio: 1 / 1;
     border-radius: 0px;
     margin: 10px;

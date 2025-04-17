@@ -59,7 +59,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Graph font */
 .jsx-graph-font {
-    font-size: 30px !important;
+    font-size: 0.8em !important;
 }
 
 /* MathJax colors */

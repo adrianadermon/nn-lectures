@@ -36,7 +36,8 @@
 
         <section>
           <h2>Single-layer (shallow) neural network</h2>
-          <img data-src="./figures/graphviz/shallow_nn.svg">  
+          <!-- <img data-src="./figures/graphviz/shallow_nn.svg">   -->
+          <img data-src="./figures/typst/shallow_nn.svg" style="width: 70vw">
         </section>
 
 
@@ -112,7 +113,8 @@
 
         <section>
           <h2>Deep (multilayer) neural network</h2>
-          <img data-src="./figures/graphviz/deep_nn.svg">
+          <!-- <img data-src="./figures/graphviz/deep_nn.svg"> -->
+          <img data-src="./figures/typst/deep_nn.svg" style="width: 80vw">
         </section>
 
         <section>
@@ -132,7 +134,7 @@
           \[A^{(2)}_{\ell} = h^{(2)}_{\ell}(X) = g(w^{(2)}_{\ell 0} + \sum_{k=1}^{K_1} w^{(2)}_{\ell k} A^{(1)}_k)\]
 
           Output layer
-          \[f_m(X) = Pr(Y=m \mid X) = \frac{e^{Z_m}}{\sum_{\ell = 0}^M e^{Z_\ell}\]
+          \[f_m(X) = Pr(Y=m \mid X) = \frac{e^{Z_m}}{\sum_{\ell = 0}^M e^{Z_\ell}}\]
           where
           \[Z_m = \beta_0 + \sum_{\ell = 1}^{K_2} \beta_{m\ell}^{(2)}(X) = \beta_0 + \sum_{\ell=1}^{K_2} \beta_{m\ell} A_{\ell}^{(2)} \]
         </section>
@@ -159,11 +161,9 @@
           <style>
             .wrapper-rgb{
                 display: grid;
-                grid-template-columns: 100px 100px 100px;
+                grid-template-columns: repeat(4, 1fr);
                 align-items: center;
-            }
-            .rgb-smiley{
-                grid-column: 1/4;
+                font-size: 10pt;
             }
             .reveal figure img{
                 width: 100%;
@@ -173,25 +173,25 @@
           </style>
           <h2>RGB layers</h2>
           <div class="wrapper-rgb">
-            <div class="rgb-smiley">
+            <div>
               <figure>
                 <img data-src="./figures/conv_example/smiley_large.png">
                 <figcaption>RGB image</figcaption>
               </figure>
             </div>
-            <div>
+            <div class="fragment" data-fragment-index="2">
               <figure>
                 <img data-src="./figures/conv_example/smiley_large_0.png">
                 <figcaption>Red channel</figcaption>
               </figure>
             </div>
-            <div>
+            <div class="fragment" data-fragment-index="2">
               <figure>
                 <img data-src="./figures/conv_example/smiley_large_1.png">
                 <figcaption>Green channel</figcaption>
               </figure>
             </div>
-            <div>
+            <div class="fragment" data-fragment-index="2">
               <figure>
                 <img data-src="./figures/conv_example/smiley_large_2.png">
                 <figcaption>Blue channel</figcaption>
@@ -200,6 +200,7 @@
           </div>
         </section>
 
+        
         <section>
           <h2>Image data as matrix</h2>
 

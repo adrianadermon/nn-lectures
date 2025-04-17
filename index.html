@@ -50,7 +50,7 @@
             Output: \(f(X) = \beta_0 + \sum_{k=1}^K \beta_k A_k\)
           </p>
           <p class="fragment zoom-in">
-            Activations: \(A_k = h_k(X) = g(w_{k0} + \sum_{j=1}^p w_{kj} X_j)\)
+            Activations: \(A_k = h_k(X) = g \left(w_{k0} + \sum_{j=1}^p w_{kj} X_j \right)\)
           </p>
           <p class="fragment zoom-in">
             $g(\cdot)$ nonlinear <em>activation function</em>
@@ -60,7 +60,7 @@
         <section>
           <h2>Full model</h2>
 
-          \[ f(X) = \beta_0 + \sum_{k=1}^K \beta_k g(w_{k0} + \sum_{j=1}^p w_{kj} X_j) \]
+          \[ f(X) = \beta_0 + \sum_{k=1}^K \beta_k g \left(w_{k0} + \sum_{j=1}^p w_{kj} X_j \right) \]
         </section>
 
         <section>
@@ -97,7 +97,8 @@
 
         <section>
           <h2>Simple illustration</h2>
-          <img data-src="./figures/graphviz/shallow_nn_p1.svg">
+          <!-- <img data-src="./figures/graphviz/shallow_nn_p1.svg"> -->
+          <img data-src="./figures/typst/simple_shallow_nn.svg">
         </section>
 
         <section>
@@ -123,15 +124,15 @@
         </section>
 
         
-        <section>
+        <section style="font-size: 16pt">
           <h2>Model structure</h2>
           Inputs $X_{j}$ $\rightarrow$ activations $A^{(1)}_{k}$ $\rightarrow$ activations $A^{(2)}_{\ell}$ $\rightarrow$ output $Y$
 
           Hidden layer $L_1$
-          \[A^{(1)}_k = h^{(1)}_k(X) = g(w^{(1)}_{k0} + \sum_{j=1}^p w^{(1)}_{kj} X_j)\]
+          \[A^{(1)}_k = h^{(1)}_k(X) = g \left(w^{(1)}_{k0} + \sum_{j=1}^p w^{(1)}_{kj} X_j \right)\]
 
           Hidden layer $L_2$
-          \[A^{(2)}_{\ell} = h^{(2)}_{\ell}(X) = g(w^{(2)}_{\ell 0} + \sum_{k=1}^{K_1} w^{(2)}_{\ell k} A^{(1)}_k)\]
+          \[A^{(2)}_{\ell} = h^{(2)}_{\ell}(X) = g \left(w^{(2)}_{\ell 0} + \sum_{k=1}^{K_1} w^{(2)}_{\ell k} A^{(1)}_k \right)\]
 
           Output layer
           \[f_m(X) = Pr(Y=m \mid X) = \frac{e^{Z_m}}{\sum_{\ell = 0}^M e^{Z_\ell}}\]

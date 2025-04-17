@@ -1,6 +1,9 @@
 set windows-shell := ["powershell.exe", "-NoLogo", "-Command"]
 
-default: shallow_nn deep_nn
+default: simple_shallow_nn shallow_nn deep_nn
+
+simple_shallow_nn:
+  typst compile --format svg simple_shallow_nn.typ
 
 shallow_nn:
   typst compile --format svg shallow_nn.typ

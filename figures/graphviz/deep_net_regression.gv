@@ -1,0 +1,77 @@
+digraph g {
+
+  graph [dpi = 300, size = 4.7]
+  graph [rankdir = LR;
+         splines = false;
+         ranksep = 1.5]
+
+  node [fontname = Arial, shape = circle, style = filled]        
+
+  {
+    node [shape = plaintext, fillcolor = none]
+    label_x [label = "Input layer"]
+    label_za [label = "Hidden layer a"]
+    label_zb [label = "Hidden layer b"]
+    label_y [label = "Output layer"]
+  }
+
+  {
+    node [fillcolor = palegreen]
+    x1 [label = <X<sub>1</sub>>]
+    x2 [label = <X<sub>2</sub>>]
+    x3 [label = <X<sub>3</sub>>]
+    x4 [label = <X<sub>4</sub>>]
+  }
+
+  {
+    node [fillcolor = deepskyblue]
+    za1 [label = <Z<sub>a,1</sub>>]
+    za2 [label = <Z<sub>a,2</sub>>]
+    za3 [label = <Z<sub>a,3</sub>>]
+    za4 [label = <Z<sub>a,4</sub>>]
+    za5 [label = <Z<sub>a,5</sub>>]
+    za6 [label = <Z<sub>a,6</sub>>]
+  }
+
+  {
+    node [fillcolor = moccasin]
+    zb1 [label = <Z<sub>b,1</sub>>]
+    zb2 [label = <Z<sub>b,2</sub>>]
+    zb3 [label = <Z<sub>b,3</sub>>]
+    zb4 [label = <Z<sub>b,4</sub>>]
+    zb5 [label = <Z<sub>b,5</sub>>]
+    zb6 [label = <Z<sub>b,6</sub>>]
+  }
+
+  {
+    node [fillcolor = pink]
+    y [label = <Y>]
+  }
+
+  edge [style = invis]
+
+  { 
+    rank=same;
+    label_x -> x1 -> x2 -> x3 -> x4;
+  }
+
+  { 
+    rank=same;
+    label_za -> za1 -> za2 -> za3 -> za4 -> za5 -> za6;
+  }
+
+  { 
+    rank=same;
+    label_zb -> zb1 -> zb2 -> zb3 -> zb4 -> zb5 -> zb6;
+  }
+
+  { 
+    rank=same;
+    label_y -> y;
+  }
+
+  {
+    edge [style=solid]
+    {x1;x2;x3;x4} -> {za1;za2;za3;za4;za5;za6} -> {zb1;zb2;zb3;zb4;zb5;zb6} -> y
+  }
+}

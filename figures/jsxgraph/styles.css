@@ -1,0 +1,99 @@
+/* Title */
+.reveal h1 {
+    font-size: 1em;
+}
+
+/* Slide headers */
+.reveal h2 {
+    font-size: 1em;
+}
+
+
+iframe {
+    border: 0px;
+}
+
+.org-svg {
+    width: 70%;
+    object-fit: contain;
+}
+
+.reveal-viewport {
+                 background-color: #f9f9f9;      
+}
+
+
+/* From stats-vis --- harmonize! */
+:root {
+    --background-color: #f9f9f9;
+    /* --base-color: #87919e; */
+    --base-color: #707078;
+    --alt-color: #8da7be;
+    --alt-color-2: #707078;
+    --graph-blue: #0072B2;
+    --graph-red: #D55E00;
+    --graph-black: #000000;
+    --graph-green: #009E73;
+    --graph-orange: #E69F00;
+}
+
+/* Main setup */
+html {
+    font-family: "Raleway", sans-serif;
+    background-color: var(--background-color);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: "Montserrat", sans-serif;
+    font-weight: normal;
+}
+
+/* JSXGraph board */
+.jxgbox {
+    background-color: transparent;
+    /* border-style: dashed; */
+    /* border-radius: 0px; */
+    /* margin: 10px; */
+    /* border-width: 0px; */
+}
+
+/* Graph font */
+.jsx-graph-font {
+    font-size: 30px !important;
+}
+
+/* MathJax colors */
+.math-jax-blue {
+    color: var(--graph-blue);
+}
+.math-jax-red {
+    color: var(--graph-red);
+}
+
+/* Style hyperlinks */
+a {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link,
+a:visited {
+  color: var(--base-color);
+}
+
+a:focus,
+a:hover {
+  border-bottom: 1px solid;
+  color: var(--alt-color);
+}
+
+a:active {
+  color: var(--alt-color-2);
+}
+
+.last-updated {
+  margin-top: 1em;
+  text-align: right;
+}
+

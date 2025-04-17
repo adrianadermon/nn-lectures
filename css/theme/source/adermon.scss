@@ -1,0 +1,52 @@
+/**
+ * Theme for reveal.js. Based on the 'white' theme.
+ *
+ * By Adrian Adermon
+ */
+
+
+// Default mixins and settings -----------------
+@use "sass:color";
+@import "../template/mixins";
+@import "../template/settings";
+// ---------------------------------------------
+
+
+// Include theme-specific fonts
+// @import url(./fonts/source-sans-pro/source-sans-pro.css);
+@import url(./fonts/Raleway/raleway.css);
+@import url(./fonts/Monserrat/monserrat.css);
+
+
+// Override theme settings (see ../template/settings.scss)
+$backgroundColor: #f9f9f9;
+
+$mainColor: #222;
+$headingColor: #222;
+
+$mainFontSize: 40px;
+$mainFont: 'Raleway', Helvetica, sans-serif;
+$headingFont: 'Monserrat', Helvetica, sans-serif;
+$headingTextShadow: none;
+$headingLetterSpacing: normal;
+$headingTextTransform: uppercase;
+$headingFontWeight: 400;
+$linkColor: #2a76dd;
+$linkColorHover: color.scale( $linkColor, $lightness: 15% );
+$selectionBackgroundColor: color.scale( $linkColor, $lightness: 25% );
+
+$heading1Size: 1.8em;
+$heading2Size: 1.4em;
+$heading3Size: 1.3em;
+$heading4Size: 1.0em;
+
+$overlayElementBgColor: 0, 0, 0;
+$overlayElementFgColor: 240, 240, 240;
+
+// Change text colors against dark slide backgrounds
+@include dark-bg-text-color(#fff);
+
+
+// Theme template ------------------------------
+@import "../template/theme";
+// ---------------------------------------------

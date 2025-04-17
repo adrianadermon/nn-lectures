@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+    
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/adermon.css">
+    
+    <link rel="stylesheet" href="styles.css"/>
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Machine Learning with Economic and Financial Applications</h1>
+          <h4>Lecture 5: Neural networks</h4>
+          <h5> Adrian Adermon</h5>
+          <h5>2025-05-16</h5>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## What is a neural network?
+            - Nonlinear prediction
+            - Extremely flexible
+            - Many inputs, many outputs
+          </textarea>
+        </section>
+
+        <section>
+          <h2>Single-layer (shallow) neural network</h2>
+          <img data-src="./figures/graphviz/shallow_nn.svg">  
+        </section>
+
+
+        <section>
+          <h2>Model structure</h2> 
+          <p class="fragment zoom-in">
+            Inputs $X_{j}$ $\rightarrow$ activations $A_{k}$ $\rightarrow$ output $Y$
+          </p>
+          <p class="fragment zoom-in">
+            Output: \(f(X) = \beta_0 + \sum_{k=1}^K \beta_k A_k\)
+          </p>
+          <p class="fragment zoom-in">
+            Activations: \(A_k = h_k(X) = g(w_{k0} + \sum_{j=1}^p w_{kj} X_j)\)
+          </p>
+          <p class="fragment zoom-in">
+            $g(\cdot)$ nonlinear <em>activation function</em>
+          </p>
+        </section>
+
+        <section>
+          <h2>Full model</h2>
+
+          \[ f(X) = \beta_0 + \sum_{k=1}^K \beta_k g(w_{k0} + \sum_{j=1}^p w_{kj} X_j) \]
+        </section>
+
+        <section>
+          <h2>Activation functions</h2>
+          <style>
+            .wrapper-activ{
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 100px 300px 100px;
+                align-items: center;
+            }
+          </style>
+          <div class="wrapper-activ">
+            <div>
+              Rectified linear unit (ReLU)
+            </div>
+            <div>
+              Sigmoid
+            </div>
+            <div>
+              <img data-src="./figures/r-plots/relu.svg">
+            </div>
+            <div>
+              <img data-src="./figures/r-plots/sigmoid.svg">
+            </div>
+            <div>
+              \[\scriptsize g(z) = \begin{cases} 0 & \text{if } z<0 \\ z & \text{otherwise} \end{cases}\]
+            </div>
+            <div>
+              \[\scriptsize g(z) = \frac{e^z}{1+e^z} = \frac{1}{1+e^{-z}}\]
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Simple illustration</h2>
+          <img data-src="./figures/graphviz/shallow_nn_p1.svg">
+        </section>
+
+        <section>
+          <h2>Shallow neural network</h2>
+          <iframe src="shallow-nn-1d/index.html" height="980" width="1920">
+          </iframe>
+        </section>
+
+        <section>
+          <h2>Single layer (shallow) neural network</h2>
+          <img data-src="./figures/graphviz/shallow_nn_p2.svg">
+        </section>
+
+        <section>
+          <h2>Deep (multilayer) neural network</h2>
+          <img data-src="./figures/graphviz/deep_nn.svg">
+        </section>
+
+        <section>
+          <h2>Deep (multilayer) neural network</h2>
+          <img data-src="./figures/graphviz/deep_nn_multi.svg">
+        </section>
+
+        
+        <section>
+          <h2>Model structure</h2>
+          Inputs $X_{j}$ $\rightarrow$ activations $A^{(1)}_{k}$ $\rightarrow$ activations $A^{(2)}_{\ell}$ $\rightarrow$ output $Y$
+
+          Hidden layer $L_1$
+          \[A^{(1)}_k = h^{(1)}_k(X) = g(w^{(1)}_{k0} + \sum_{j=1}^p w^{(1)}_{kj} X_j)\]
+
+          Hidden layer $L_2$
+          \[A^{(2)}_{\ell} = h^{(2)}_{\ell}(X) = g(w^{(2)}_{\ell 0} + \sum_{k=1}^{K_1} w^{(2)}_{\ell k} A^{(1)}_k)\]
+
+          Output layer
+          \[f_m(X) = Pr(Y=m \mid X) = \frac{e^{Z_m}}{\sum_{\ell = 0}^M e^{Z_\ell}\]
+          where
+          \[Z_m = \beta_0 + \sum_{\ell = 1}^{K_2} \beta_{m\ell}^{(2)}(X) = \beta_0 + \sum_{\ell=1}^{K_2} \beta_{m\ell} A_{\ell}^{(2)} \]
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Terminology
+            *Deep* refers to multiple hidden layers
+
+            Other names
+            - Feedforward network
+            - Multilayer perceptron (MLP)
+            ---
+            
+            ## Image processing
+            Challenges for fully connected NN
+            - High-dimensional inputs (224x224 RGB pixels = 150,528 dimensions)
+            - Spatial information relevant
+            - Transformations of image change inputs
+          </textarea>
+        </section>
+
+        <section>
+          <style>
+            .wrapper-rgb{
+                display: grid;
+                grid-template-columns: 100px 100px 100px;
+                align-items: center;
+            }
+            .rgb-smiley{
+                grid-column: 1/4;
+            }
+            .reveal figure img{
+                width: 100%;
+                max-width: 100%;
+                object-fit: contain;
+            }
+          </style>
+          <h2>RGB layers</h2>
+          <div class="wrapper-rgb">
+            <div class="rgb-smiley">
+              <figure>
+                <img data-src="./figures/conv_example/smiley_large.png">
+                <figcaption>RGB image</figcaption>
+              </figure>
+            </div>
+            <div>
+              <figure>
+                <img data-src="./figures/conv_example/smiley_large_0.png">
+                <figcaption>Red channel</figcaption>
+              </figure>
+            </div>
+            <div>
+              <figure>
+                <img data-src="./figures/conv_example/smiley_large_1.png">
+                <figcaption>Green channel</figcaption>
+              </figure>
+            </div>
+            <div>
+              <figure>
+                <img data-src="./figures/conv_example/smiley_large_2.png">
+                <figcaption>Blue channel</figcaption>
+              </figure>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <h2>Image data as matrix</h2>
+
+          <img data-src="./figures/conv_example/smiley_large_0.png">
+          <span style="font-size: 16pt">
+          \[
+          \tiny
+          \begin{bmatrix} 
+          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
+          1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
+          1 & 1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 & 1 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 0.04 & 0.04 & 0.04 & 0.04 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          1 & 0.24 & 0.93 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.93 & 0.24 & 1 \\ 
+          1 & 1 & 0.24 & 0.93 & 0.93 & 1 & 1 & 1 & 1 & 0.93 & 0.93 & 0.24 & 1 & 1 \\ 
+          1 & 1 & 1 & 0.24 & 0.24 & 0.93 & 0.93 & 0.93 & 0.93 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
+          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
+          \end{bmatrix}
+          \]
+          </span>
+        </section>
+
+        <section>
+          <style>
+            .wrapper-conv{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 300px);
+                align-items: center;
+            }
+          </style>
+          <h2>Convolution example</h2>          
+          <div class="wrapper-conv">
+            <div class="orig">
+              <img data-src="./figures/conv_example/smiley_large_0.png">
+            </div>
+            <div>
+              \(\ast \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} = \)
+            </div>
+            <div>
+              <img data-src="./figures/conv_example/smiley_convolve_h_large.png">
+            </div>
+            <div>
+              <img data-src="./figures/conv_example/smiley_large_0.png">
+            </div>
+            <div>
+              \(\ast \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix} = \)
+            </div>
+            <div>
+              <img data-src="./figures/conv_example/smiley_convolve_v_large.png">
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <style>
+            .wrapper{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 300px);
+                align-items: center;
+            }
+          </style>
+          <h2>Convolution example</h2>          
+          <div class="wrapper">
+            <div class="orig">
+              <img data-src="./figures/conv_example/First_flight2.jpg">
+            </div>
+            
+            <div class="mat1">
+              \(\scriptsize \ast \begin{bmatrix} -1 & -1 & -1 \\ 0 & 0 & 0 \\ 1 & 1 & 1 \end{bmatrix} = \)
+            </div>
+
+            <div class="trans1">
+              <img src="./figures/conv_example/flight_h.png">
+            </div>
+            
+            <div>
+              <img data-src="./figures/conv_example/First_flight2.jpg">
+            </div>
+            <div class="mat2">
+              \(\scriptsize \ast \begin{bmatrix} -1 & 0 & 1 \\ -1 & 0 & 1 \\ -1 & 0 & 1 \end{bmatrix} = \)
+            </div>
+            <div class="trans2">
+              <img data-src="./figures/conv_example/flight_v.png">
+            </div>
+          </div>
+        </section>
+
+
+        
+
+	<section data-transition="slide-in fade-out">
+          Convolution filter
+          \begin{multline}
+          \begin{bmatrix}
+          a & b & \color{lightgray} c \\
+          d & e & \color{lightgray} f \\
+          \color{lightgray} g & \color{lightgray} h & \color{lightgray} i
+          \end{bmatrix}
+          \ast
+          \begin{bmatrix}
+          \alpha & \beta \\
+          \gamma & \delta
+          \end{bmatrix}
+          = \\
+          \begin{bmatrix}
+          a\alpha + b\beta + d\gamma + e\delta &
+          \color{lightgray} b\alpha + c\beta + e\gamma + f\delta & \\
+          \color{lightgray} d\alpha + e\beta + g\gamma + h\delta &
+          \color{lightgray} e\alpha + f\beta + h\gamma + i\delta & \\
+          \end{bmatrix}
+          \end{multline}
+        </section>
+
+
+	<section data-transition="fade">
+          Convolution filter
+          \begin{multline}
+          \begin{bmatrix}
+          \color{lightgray}a & b &  c \\
+          \color{lightgray}d & e &  f \\
+          \color{lightgray} g & \color{lightgray} h & \color{lightgray} i
+          \end{bmatrix}
+          \ast
+          \begin{bmatrix}
+          \alpha & \beta \\
+          \gamma & \delta
+          \end{bmatrix}
+          = \\
+          \begin{bmatrix}
+          \color{lightgray} a\alpha + b\beta + d\gamma + e\delta &
+          b\alpha + c\beta + e\gamma + f\delta & \\
+          \color{lightgray} d\alpha + e\beta + g\gamma + h\delta &
+          \color{lightgray} e\alpha + f\beta + h\gamma + i\delta & \\
+          \end{bmatrix}
+          \end{multline}
+        </section>
+
+	<section data-transition="fade">
+          Convolution filter
+          \begin{multline}
+          \begin{bmatrix}
+          \color{lightgray}a & \color{lightgray}b &  \color{lightgray}c \\
+          d & e &  \color{lightgray}f \\
+          g & h & \color{lightgray} i
+          \end{bmatrix}
+          \ast
+          \begin{bmatrix}
+          \alpha & \beta \\
+          \gamma & \delta
+          \end{bmatrix}
+          = \\
+          \begin{bmatrix}
+          \color{lightgray} a\alpha + b\beta + d\gamma + e\delta &
+          \color{lightgray} b\alpha + c\beta + e\gamma + f\delta & \\
+          d\alpha + e\beta + g\gamma + h\delta &
+          \color{lightgray} e\alpha + f\beta + h\gamma + i\delta & \\
+          \end{bmatrix}
+          \end{multline}
+        </section>
+
+	<section data-transition="fade-in slide-out">
+          Convolution filter
+          \begin{multline}
+          \begin{bmatrix}
+          \color{lightgray}a & \color{lightgray}b &  \color{lightgray}c \\
+          \color{lightgray}d & e &  f \\
+          \color{lightgray} g & h &  i
+          \end{bmatrix}
+          \ast
+          \begin{bmatrix}
+          \alpha & \beta \\
+          \gamma & \delta
+          \end{bmatrix}
+          = \\
+          \begin{bmatrix}
+          \color{lightgray} a\alpha + b\beta + d\gamma + e\delta &
+          \color{lightgray} b\alpha + c\beta + e\gamma + f\delta & \\
+          \color{lightgray} d\alpha + e\beta + g\gamma + h\delta &
+          e\alpha + f\beta + h\gamma + i\delta & \\
+          \end{bmatrix}
+          \end{multline}
+        </section>
+        
+	<section>
+          <h2>Max pooling</h2>
+          \[
+          \begin{bmatrix}
+          \color{NavyBlue} 1 &\color{NavyBlue} 2 &
+          \color{ForestGreen} 5 & \color{ForestGreen} 3 \\
+          \color{NavyBlue}  3 &\color{NavyBlue}  0 &
+          \color{ForestGreen} 1 & \color{ForestGreen} 2 \\
+          \color{WildStrawberry} 2 & \color{WildStrawberry} 1 &
+          \color{BurntOrange} 3 & \color{BurntOrange} 4 \\
+          \color{WildStrawberry} 1 & \color{WildStrawberry} 1 &
+          \color{BurntOrange} 2 & \color{BurntOrange} 0
+          \end{bmatrix}
+          \rightarrow
+          \begin{bmatrix}
+          \color{NavyBlue} 3 & \color{ForestGreen} 5 \\
+          \color{WildStrawberry} 2 & \color{BurntOrange} 4
+          \end{bmatrix}
+          \]
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+	  hash: true,
+	  // Learn about plugins: https://revealjs.com/plugins/
+	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ]
+      });
+    </script>
+  </body>
+</html>

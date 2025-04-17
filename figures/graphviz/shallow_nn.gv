@@ -1,0 +1,61 @@
+  digraph g {
+
+    graph [rankdir = LR;
+           splines = false;
+           ranksep = 1.5;
+           bgcolor = "#f9f9f9"]
+
+    node [fontname = Arial, shape = circle, style = filled]        
+
+    {
+      node [shape = plaintext, fillcolor = none]
+      label_x [label = "Input layer"]
+      label_a [label = "Hidden layer"]
+      label_fx [label = "Output layer"]
+      y [label = <Y>]
+    }
+
+    {
+      node [fillcolor = palegreen]
+      x1 [label = <X<sub>1</sub>>]
+      x2 [label = <X<sub>2</sub>>]
+      x3 [label = <X<sub>3</sub>>]
+      x4 [label = <X<sub>4</sub>>]
+    }
+
+    {
+      node [fillcolor = deepskyblue]
+      a1 [label = <A<sub>1</sub>>]
+      a2 [label = <A<sub>2</sub>>]
+      a3 [label = <A<sub>3</sub>>]
+      a4 [label = <A<sub>4</sub>>]
+      a5 [label = <A<sub>5</sub>>]
+    }
+
+    {
+      node [fillcolor = pink]
+      fx [label = <f(X)>]
+    }
+
+    edge [style = invis]
+
+    { 
+      rank=same;
+      label_x -> x1 -> x2 -> x3 -> x4;
+    }
+
+    { 
+      rank=same;
+      label_a -> a1 -> a2 -> a3 -> a4 -> a5;
+    }
+
+    { 
+      rank=same;
+      label_fx -> fx;
+    }
+
+    {
+      edge [style=solid]
+      {x1;x2;x3;x4} -> {a1;a2;a3;a4;a5} -> fx -> y
+    }
+  }

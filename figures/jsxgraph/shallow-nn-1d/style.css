@@ -1,0 +1,71 @@
+.container {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 5fr 10fr 1fr 10fr 1fr 10fr 1fr 10fr;
+}
+
+.jxgbox {
+    /* border-style: dashed; */
+    /* border-radius: 0px; */
+    /* margin: 10px; */
+    /* border-width: 0px; */
+}
+      
+.arrows {
+    font-size: 3vw;
+}
+      /* .roboto-<uniquifier> { */
+      /*     font-family: "Roboto", serif; */
+      /*     font-optical-sizing: auto; */
+      /*     font-weight: 200; */
+      /*     font-style: normal; */
+      /*     font-variation-settings: */
+      /*         "wdth" 100; */
+      /* } */
+.controls {
+    width: 95%;
+    aspect-ratio: 1 / 1;
+    border-width: 0px;
+}
+
+.graph {
+    width: 95%px;
+    aspect-ratio: 1 / 1;
+    border-radius: 0px;
+    margin: 10px;
+    border-width: 2px;
+}
+
+.input {
+     grid-column: 1;
+}
+.lin {
+     grid-column: 2;
+}
+.linclip {
+     grid-column: 3;
+}
+.clip {
+     grid-column: 4;
+}
+.clipscale {
+     grid-column: 5;
+}
+.scale {
+     grid-column: 6;
+}
+.scaleoutput {
+     grid-column: 7;
+}
+.output {
+     grid-column: 8;
+}
+.label {
+    grid-row: 1;
+}
+.h1 {
+    grid-row: 2;
+}
+.h2 {
+    grid-row: 3;
+}

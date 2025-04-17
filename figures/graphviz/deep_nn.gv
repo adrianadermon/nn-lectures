@@ -1,0 +1,76 @@
+  digraph g {
+
+    graph [rankdir = LR;
+           splines = false;
+           ranksep = 1.5,
+           bgcolor = "#f9f9f9"]
+    node [fontname = Arial, shape = circle, style = filled]        
+
+    {
+      node [shape = plaintext, fillcolor = none]
+      label_x [label = "Input layer"]
+      label_a1 [label = "Hidden layer L₁"]
+      label_a2 [label = "Hidden layer L₂"]
+      label_y [label = "Output layer"]
+    }
+
+    {
+      node [fillcolor = palegreen]
+      x1 [label = <X<sub>1</sub>>]
+      x2 [label = <X<sub>2</sub>>]
+      x3 [label = <X<sub>3</sub>>]
+      x4 [label = <X<sub>4</sub>>]
+    }
+
+    {
+      node [fillcolor = deepskyblue]
+      a11 [label = <A<sup>(1)</sup><sub>1</sub>>]
+      a12 [label = <A<sup>(1)</sup><sub>2</sub>>]
+      a13 [label = <A<sup>(1)</sup><sub>3</sub>>]
+      a14 [label = <A<sup>(1)</sup><sub>4</sub>>]
+      a15 [label = <A<sup>(1)</sup><sub>5</sub>>]
+      a16 [label = <A<sup>(1)</sup><sub>6</sub>>]
+    }
+
+    {
+      node [fillcolor = moccasin]
+      a21 [label = <A<sup>(2)</sup><sub>1</sub>>]
+      a22 [label = <A<sup>(2)</sup><sub>2</sub>>]
+      a23 [label = <A<sup>(2)</sup><sub>3</sub>>]
+      a24 [label = <A<sup>(2)</sup><sub>4</sub>>]
+      a25 [label = <A<sup>(2)</sup><sub>5</sub>>]
+      a26 [label = <A<sup>(2)</sup><sub>6</sub>>]
+    }
+
+    {
+      node [fillcolor = pink]
+      y [label = <Y>]
+    }
+
+    edge [style = invis]
+
+    { 
+      rank=same;
+      label_x -> x1 -> x2 -> x3 -> x4;
+    }
+
+    { 
+      rank=same;
+      label_a1 -> a11 -> a12 -> a13 -> a14 -> a15 -> a16;
+    }
+
+    { 
+      rank=same;
+      label_a2 -> a21 -> a22 -> a23 -> a24 -> a25 -> a26;
+    }
+
+    { 
+      rank=same;
+      label_y -> y;
+    }
+
+    {
+      edge [style=solid]
+      {x1;x2;x3;x4} -> {a11;a12;a13;a14;a15;a16} -> {a21;a22;a23;a24;a25;a26} -> y
+    }
+  }

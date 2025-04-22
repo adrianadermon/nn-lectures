@@ -1,14 +1,14 @@
 #import "@preview/cetz:0.3.4": canvas, draw
 #import "@preview/cetz-plot:0.1.1": plot
 
-#set page(width: auto, height: auto, margin: .5cm)
+#set page(width: auto, height: auto, margin: .5cm, fill: none)
 
 
 #let style = (stroke: black, fill: rgb(0, 0, 200, 75))
 
 #let sigmoid(z) = 1/(1+calc.exp(-z))
 
-#set text(size: 10pt)
+#set text(size: 18pt)
 
 #canvas({
     import draw: *

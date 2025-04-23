@@ -5,6 +5,8 @@
   font: "Raleway"
 )
 
+#set text(size: 20pt)
+
 #diagram(
     node-stroke: black,
     node-shape: circle,

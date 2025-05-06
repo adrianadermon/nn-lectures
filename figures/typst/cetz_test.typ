@@ -44,7 +44,6 @@
                     width: 0.2)
                 box(1, 1, 1,
                     width: 0.3, height: 0.3, depth: 0.3)
-
                 on-yz({
                     line((0.15, 0), (0.02, 0), mark: (end: "straight"))
                 }, x: 0.2)
@@ -53,4 +52,6 @@
                 },
                     z: 0.2)
             })
+        
     })
+

@@ -166,7 +166,8 @@
                 display: grid;
                 grid-template-columns: repeat(4, 1fr);
                 align-items: center;
-                font-size: 10pt;
+                font-size: 18pt;
+                column-gap: 20px;
             }
             .reveal figure img{
                 width: 100%;
@@ -231,72 +232,37 @@
           </span>
         </section>
 
-        <section>
-          <style>
-            .wrapper-conv{
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, 300px);
-                align-items: center;
-            }
-          </style>
-          <h2>Convolution example</h2>          
-          <div class="wrapper-conv">
-            <div class="orig">
-              <img data-src="./figures/conv_example/smiley_large_0.png">
-            </div>
-            <div>
-              \(\ast \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} = \)
-            </div>
-            <div>
-              <img data-src="./figures/conv_example/smiley_convolve_h_large.png">
-            </div>
-            <div>
-              <img data-src="./figures/conv_example/smiley_large_0.png">
-            </div>
-            <div>
-              \(\ast \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix} = \)
-            </div>
-            <div>
-              <img data-src="./figures/conv_example/smiley_convolve_v_large.png">
-            </div>
-          </div>
-        </section>
-
-        <section>
-          <style>
-            .wrapper{
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                grid-template-rows: repeat(2, 300px);
-                align-items: center;
-            }
-          </style>
-          <h2>Convolution example</h2>          
-          <div class="wrapper">
-            <div class="orig">
-              <img data-src="./figures/conv_example/First_flight2.jpg">
-            </div>
-            
-            <div class="mat1">
-              \(\scriptsize \ast \begin{bmatrix} -1 & -1 & -1 \\ 0 & 0 & 0 \\ 1 & 1 & 1 \end{bmatrix} = \)
-            </div>
-
-            <div class="trans1">
-              <img src="./figures/conv_example/flight_h.png">
-            </div>
-            
-            <div>
-              <img data-src="./figures/conv_example/First_flight2.jpg">
-            </div>
-            <div class="mat2">
-              \(\scriptsize \ast \begin{bmatrix} -1 & 0 & 1 \\ -1 & 0 & 1 \\ -1 & 0 & 1 \end{bmatrix} = \)
-            </div>
-            <div class="trans2">
-              <img data-src="./figures/conv_example/flight_v.png">
-            </div>
-          </div>
-        </section>
+        <!-- <section> -->
+        <!--   <style> -->
+        <!--     .wrapper-conv{ -->
+        <!--         display: grid; -->
+        <!--         grid-template-columns: repeat(3, 1fr); -->
+        <!--         grid-template-rows: repeat(2, 300px); -->
+        <!--         align-items: center; -->
+        <!--     } -->
+        <!--   </style> -->
+        <!--   <h2>Convolution example</h2>           -->
+        <!--   <div class="wrapper-conv"> -->
+        <!--     <div class="orig"> -->
+        <!--       <img data-src="./figures/conv_example/smiley_large_0.png"> -->
+        <!--     </div> -->
+        <!--     <div> -->
+        <!--       \(\ast \begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} = \) -->
+        <!--     </div> -->
+        <!--     <div> -->
+        <!--       <img data-src="./figures/conv_example/smiley_convolve_h_large.png"> -->
+        <!--     </div> -->
+        <!--     <div> -->
+        <!--       <img data-src="./figures/conv_example/smiley_large_0.png"> -->
+        <!--     </div> -->
+        <!--     <div> -->
+        <!--       \(\ast \begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix} = \) -->
+        <!--     </div> -->
+        <!--     <div> -->
+        <!--       <img data-src="./figures/conv_example/smiley_convolve_v_large.png"> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!-- </section> -->
 
 
         
@@ -394,6 +360,81 @@
           \end{multline}
         </section>
         
+        <section>
+          <style>
+            .wrapper{
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(2, 300px);
+                align-items: center;
+            }
+          </style>
+          <h2>Convolution example</h2>          
+          <div class="wrapper">
+            <div class="orig">
+              <img data-src="./figures/conv_example/First_flight2.jpg">
+            </div>
+            
+            <div class="mat1">
+              \(\scriptsize \ast \begin{bmatrix} -1 & -1 & -1 \\ 0 & 0 & 0 \\ 1 & 1 & 1 \end{bmatrix} = \)
+            </div>
+
+            <div class="trans1">
+              <img src="./figures/conv_example/flight_h.png">
+            </div>
+            
+            <div>
+              <img data-src="./figures/conv_example/First_flight2.jpg">
+            </div>
+            <div class="mat2">
+              \(\scriptsize \ast \begin{bmatrix} -1 & 0 & 1 \\ -1 & 0 & 1 \\ -1 & 0 & 1 \end{bmatrix} = \)
+            </div>
+            <div class="trans2">
+              <img data-src="./figures/conv_example/flight_v.png">
+            </div>
+          </div>
+        </section>
+
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Convolution filter
+
+            - Picks out different shapes in image
+            - Parameters learned from data
+            
+            ---
+            
+            ## Input layer
+            RGB image
+            - Three channels (red, green, blue)
+            - Each channel a 2D *feature map*
+            
+            ---
+
+            ## Convolution layer
+            
+            - Multiple convolution filters
+            - Each filter
+              - Channels = units in previous layer
+              - Sum output to 2D feature map
+              - Add bias and apply activation
+            ---
+
+            ## Hierarchical learning
+            - Filters learns *local features*
+            - Layers create *compound features*
+            - Successively more high-level
+
+            ---
+            
+            ## Pooling layer
+
+            Reduces dimensions of feature maps
+            
+          </textarea>
+        </section>
+
 	<section>
           <h2>Max pooling</h2>
           \[
@@ -415,6 +456,8 @@
           \]
         </section>
 
+
+        
         <section>
           <h2>
             AlexNet

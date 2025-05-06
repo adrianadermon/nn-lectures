@@ -1,7 +1,10 @@
-default: simple_shallow_nn shallow_nn deep_nn relu sigmoid
+default: simple_shallow_nn shallow_nn_two_var shallow_nn deep_nn relu sigmoid
 
 simple_shallow_nn:
   typst compile --format svg simple_shallow_nn.typ
+  
+shallow_nn_two_var:
+  typst compile --format svg shallow_nn_two_var.typ
 
 shallow_nn:
   typst compile --format svg shallow_nn.typ

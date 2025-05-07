@@ -169,13 +169,7 @@
 
         <section>
           <h2>Deep neural network</h2>
-          <!-- <img data-src="./figures/graphviz/deep_nn.svg"> -->
           <img data-src="./figures/typst/deep_nn.svg" style="width: 80vw">
-        </section>
-
-        <section>
-          <h2>Classification network</h2>
-          <img data-src="./figures/typst/deep_nn_class.svg" style="width: 80vw">
         </section>
         
         <section style="font-size: 16pt">
@@ -191,9 +185,28 @@
           \[A^{(2)}_{\ell} = h^{(2)}_{\ell}(X) = g \left(w^{(2)}_{\ell 0} + \sum_{k=1}^{K_1} w^{(2)}_{\ell k} A^{(1)}_k \right)\]
 
           Output layer
+          \[f(X) = \beta_0 + \sum_{\ell = 1}^{K_2} \beta_{\ell} h^{(2)}_{\ell}(X) = \beta_0 + \sum_{\ell=1}^{K_2} \beta_{\ell} A_{\ell}^{(2)} \]
+        </section>
+
+        <section>
+          <h2>Classification network</h2>
+          <img data-src="./figures/typst/deep_nn_class.svg" style="width: 80vw">
+        </section>
+        
+        <section style="font-size: 16pt">
+          <h2>Classification output layer</h2>
+
+          <p>
+          Convert output to probabilities
+          </p>
+          <em>Softmax</em> activation function:
           \[f_m(X) = Pr(Y=m \mid X) = \frac{e^{Z_m}}{\sum_{\ell = 0}^M e^{Z_\ell}}\]
           where
-          \[Z_m = \beta_0 + \sum_{\ell = 1}^{K_2} \beta_{m\ell}^{(2)}(X) = \beta_0 + \sum_{\ell=1}^{K_2} \beta_{m\ell} A_{\ell}^{(2)} \]
+          \[Z_m = \beta_0 + \sum_{\ell = 1}^{K_2} \beta_{m\ell} h_{\ell}^{(2)}(X) = \beta_0 + \sum_{\ell=1}^{K_2} \beta_{m\ell} A_{\ell}^{(2)} \]
+
+          <p>
+            Ensures probabilities are non-negative, sum to one
+          </p>
         </section>
 
         <section data-markdown>
@@ -218,7 +231,7 @@
           \[\sum_{i=1}^n (y_i - f(x_i))^2 \]
 
           Classification: cross-entropy
-          \[-\sum_{i=1}^n \sum_{m=0}^M y_{im} \log (f_m (x_i))\]
+          \[-\sum_{i=1}^n \sum_{m=0}^M \underbrace{y_{im}}_{\substack{\text{Class} \\ \text{indicator}}} \underbrace{\log (\overbrace{f_m (x_i)}^{\text{Probability}})}_{\substack{\substack{\text{Always} \\ \text{negative}}}}\]
         </section>
         
         <section data-markdown>
@@ -314,7 +327,7 @@
 
         <section>
           <figure>
-            <img data-src="./figures/francis_224x224.jpg"  style="width: 30vw">
+            <img data-src="./figures/francis_224x224.jpg"  style="height: 40vh">
           </figure>
           <figcaption>224x224 pixels</figcaption>
         </section>

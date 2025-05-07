@@ -168,26 +168,22 @@
         <!-- </section> -->
 
         <section>
-          <h2>Single layer (shallow) neural network</h2>
-          <img data-src="./figures/graphviz/shallow_nn_p2.svg">
-        </section>
-
-        <section>
           <h2>Deep neural network</h2>
           <!-- <img data-src="./figures/graphviz/deep_nn.svg"> -->
           <img data-src="./figures/typst/deep_nn.svg" style="width: 80vw">
         </section>
 
         <section>
-          <h2>Deep neural network</h2>
-          <img data-src="./figures/graphviz/deep_nn_multi.svg">
+          <h2>Classification network</h2>
+          <img data-src="./figures/typst/deep_nn_class.svg" style="width: 80vw">
         </section>
-
         
         <section style="font-size: 16pt">
           <h2>Model structure</h2>
-          Inputs $X_{j}$ $\rightarrow$ activations $A^{(1)}_{k}$ $\rightarrow$ activations $A^{(2)}_{\ell}$ $\rightarrow$ output $Y$
-
+          <p>
+            Inputs $X_{j}$ $\rightarrow$ activations $A^{(1)}_{k}$ $\rightarrow$ activations $A^{(2)}_{\ell}$ $\rightarrow$ output $Y$
+          </p>
+          
           Hidden layer $L_1$
           \[A^{(1)}_k = h^{(1)}_k(X) = g \left(w^{(1)}_{k0} + \sum_{j=1}^p w^{(1)}_{kj} X_j \right)\]
 
@@ -209,7 +205,105 @@
             - Feedforward network
             - Multilayer perceptron (MLP)
             ---
+
+            ## Fitting a neural network
+
+          </textarea>
+        </section>
+
+        <section>
+          <h2> Loss function </h2>
+          
+          Regression: squared-error loss
+          \[\sum_{i=1}^n (y_i - f(x_i))^2 \]
+
+          Classification: cross-entropy
+          \[-\sum_{i=1}^n \sum_{m=0}^M y_{im} \log (f_m (x_i))\]
+        </section>
+        
+        <section data-markdown>
+          <textarea data-template>
+            ## Minimizing loss function
+
+            - Non-convex problem — multiple local minima
+
+            - Requires iterative procedure
+          </textarea>
+        </section>
+        
+        <section>
+          <h2> Gradient descent </h2>
+          <ol>
+          <li> Initial guess $\theta_0$ for parameters $\theta$ </li>
+          <li>Take a small step in direction of largest decrease (gradient)</li>
+          <ul>
+            <li>Repeat until change is very small</li>
+          </ul>
+          </ol>
+        </section>
+        
+        <section>
+          <h2> Backpropagation </h2>
+
+          <p>
+          How do we find and evaluate gradient?
+          </p>
+
+          <p>
+          Chain rule:
+          <!-- If $h(x) = f(g(x))$, then $h^\prime(x) = f^\prime(g(x)) g^\prime(x)$ -->
+          $\frac{dz}{dx} = \frac{dz}{dy} \frac{dy}{dx}$
+          </p>
+          
+          Start at the end and work backwards
+        </section>
+          
+        <section data-markdown>
+          <textarea data-template>
+            ## Problems with gradient descent
+
+            - Uses entire data set in each iteration 
             
+            - Might get stuck in local minimum
+            
+            - Solution: *stochastic* gradient descent
+
+            ---
+
+            ## Stochastic gradient descent
+
+            - Random subsample (*minibatch*) for each iteration
+            
+            - Complete pass through data = *epoch*
+
+            ---
+
+            ## Preventing overfitting
+
+            - Ridge and/or lasso regularization
+
+            - *Early stopping* of training
+
+            - *Dropout learning*: turn off random subset of nodes
+
+            ---
+
+            ## Hyperparameters
+
+            - No. of hidden layers
+
+            - No. of units in each layer
+
+            - Regularization tuning parameters
+
+            - SGD tuning parameters
+            
+          </textarea>
+        </section>
+        
+        
+        <section data-markdown>
+          <textarea data-template>
             ## Image processing
             Challenges for fully connected NN
             - High-dimensional inputs (224x224 RGB pixels = 150,528 dimensions)
@@ -495,7 +589,9 @@
             
             ## Pooling layer
 
-            Reduces dimensions of feature maps
+            - Reduces dimensions of feature maps
+
+            - Successively lower resolution, but more channels
             
           </textarea>
         </section>
@@ -528,6 +624,13 @@
             AlexNet
           </h2>
             <img data-src="./figures/alexnet_data.png" style="width: 70vw">
+        </section>
+        
+        <section>
+          <h2>
+            VGG-16
+          </h2>
+            <img data-src="./figures/vgg16.png" style="width: 70vw">
         </section>
 
       </div>

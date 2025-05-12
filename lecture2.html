@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>reveal.js</title>
+    
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/adermon.css">
+    
+    <!-- <link rel="stylesheet" type="text/css" href="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraph.css" /> -->
+    <!-- <script type="text/javascript" src="https://jsxgraph.uni-bayreuth.de/distrib/jsxgraphcore.js"></script> -->
+    <!-- <link href="./figures/jsxgraph/styles.css" rel="stylesheet" /> -->
+    <!-- <link href="./figures/jsxgraph/shallow-nn-1d/style.css" rel="stylesheet" /> -->
+
+    <link rel="stylesheet" href="styles.css"/>
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>Machine Learning with Economic and Financial Applications</h1>
+          <h4>Lecture 6: Natural language processing and LLMs</h4>
+          <h5> Adrian Adermon</h5>
+          <h5>2025-05-19</h5>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Bag-of-words
+            Check each word against *dictionary*
+            - One-hot encoding
+            - Doesn't consider context
+            
+            ---
+            
+            ## Sequence-to-sequence models
+            - Sequence of inputs
+            - Sequence of outputs
+            - Example: machine translation
+            
+            ---
+            
+            ## Encoder
+
+            ---
+
+            ## Decoder
+
+            ---
+
+            ## Word embeddings
+
+            ---
+            
+            ## Recurrent neural networks
+
+            ---
+
+            ## Limitations of RNNs
+
+            ---
+
+            ## Attention
+
+            ---
+
+            ## Transformer
+
+            
+            
+          </textarea>
+        </section>
+
+        
+
+        <section data-markdown>
+          <textarea data-template>
+            $$
+            \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}
+            \begin{bmatrix} w_{11} & w_{12} \\\\ w_{21} & w_{22} \\\\ w_{31} & w_{32} \end{bmatrix} =
+            \begin{bmatrix}
+            \sum_{i=1}^3 x_i w_{i1} &
+            \sum_{i=1}^3 x_i w_{i2} 
+            \end{bmatrix}
+            $$
+          </textarea>
+        </section>
+
+        <section>
+          <h2>Long-distance attention</h2>
+          <img data-src="./figures/papers/attention_fig3.svg" style="width: 80vw">
+        </section>
+        
+        <section>
+          <h2>Two attention heads</h2>
+          <img data-src="./figures/papers/attention_fig4.svg" style="height: 50vh; transform: rotate(90deg)">
+        </section>
+        
+        <section>
+          <h2>Heads specialize</h2>
+          <img data-src="./figures/papers/attention_fig5.svg" style="height: 50vh; transform: rotate(90deg)">
+        </section>
+
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+	  hash: true,
+	  // Learn about plugins: https://revealjs.com/plugins/
+	  plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.MathJax3 ]
+      });
+    </script>
+  </body>
+</html>

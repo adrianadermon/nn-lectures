@@ -32,12 +32,47 @@
 
         <section data-markdown>
           <textarea data-template>
+            ## Natural language processing
+
+            - Statistical models work with numbers
+            
+            - Text $\Rightarrow$ numerical data? 
+            
+            ---
+            
             ## Bag-of-words
             Check each word against *dictionary*
             - One-hot encoding
-            - Doesn't consider context
+
+            - Large vectors
+            
+            - Doesn't consider context or similarity
             
             ---
+            
+            ## Word embeddings
+
+            *Word2vec*
+            Simple neural network
+            
+            - Input: short sequences of text (e.g., five words) <!-- .element: class="fragment" data-fragment-index="1" -->
+            
+            - Self-supervised: <!-- .element: class="fragment" data-fragment-index="2" -->
+              - Predict middle word (continuous bag of words) <!-- .element: class="fragment" data-fragment-index="2" -->
+              - Predict surrounding words (skip-gram) <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            - Output: word embedding vectors <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+
+            ## Semantic structure
+
+            v(Paris) - v(France) + v(Italy) ≈ v(Rome)
+
+            v(King) - v(Man) + v(Woman) ≈ v(Queen)
+            
+            ---
+            
             
             ## Sequence-to-sequence models
             - Sequence of inputs
@@ -54,10 +89,6 @@
 
             ---
 
-            ## Word embeddings
-
-            ---
-            
             ## Recurrent neural networks
 
             ---
@@ -79,6 +110,64 @@
 
         
 
+        <section data-markdown>
+          <textarea data-template>
+            ## Document as data
+            
+            ### Input
+            
+            Sequence of $L$ words: $\lbrace X_1, X_2, \ldots, X_L\rbrace$
+
+            ### Output
+            
+            - Scalar (sentiment prediction)
+            - Sequence (translation)
+          </textarea>
+        </section>
+
+        <section>
+          <h2>Recurrent neural network</h2>
+          <img data-src="figures/typst/rnn.svg">
+        </section>
+
+        
+
+        <section>
+          <h2>Structure of an RNN</h2>
+          Single hidden layer, $K$ hidden units
+          
+          $$A_{\ell k} = g \left ( w_{k0} + \sum_{j=1}^p w_{kj} X_{\ell j} + \sum_{s=1}^K u_{ks} A_{\ell-1,s} \right )$$
+
+          $$O_\ell = \beta_0 + \sum_{k=1}^K \beta_k A_{\ell k}$$
+        </section>
+
+        <section>
+          <h2>Recurrent neural network</h2>
+          
+        </section>
+
+        
+
+        <section>
+          <h2>Challenges with text as data</h2>
+          <blockquote style="font-size: 22pt; font-family: Cormorant">
+            The restaurant refused to serve me a ham sandwich because it only cooks vegetarian food. In the end, they just gave me two slices of bread. The ambiance was just as good as the service.
+          </blockquote>
+
+          <ul>
+            <li class="fragment"> Large input: 37 ⨉ 1024 = 37,888</li>
+            <li class="fragment"> Input can differ in length</li>
+            <li class="fragment"> Ambiguous syntax</li>
+          </ul>
+        </section>
+
+        
+
+        <section>
+          <h2>Dot-product self-attention</h2>
+          <img data-src="figures/typst/attention.svg" style="height: 45vh">
+        </section>
+        
         <section data-markdown>
           <textarea data-template>
             $$

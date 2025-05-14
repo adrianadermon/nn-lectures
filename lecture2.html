@@ -73,45 +73,6 @@
             
             ---
             
-            
-            ## Sequence-to-sequence models
-            - Sequence of inputs
-            - Sequence of outputs
-            - Example: machine translation
-            
-            ---
-            
-            ## Encoder
-
-            ---
-
-            ## Decoder
-
-            ---
-
-            ## Recurrent neural networks
-
-            ---
-
-            ## Limitations of RNNs
-
-            ---
-
-            ## Attention
-
-            ---
-
-            ## Transformer
-
-            
-            
-          </textarea>
-        </section>
-
-        
-
-        <section data-markdown>
-          <textarea data-template>
             ## Document as data
             
             ### Input
@@ -122,7 +83,31 @@
             
             - Scalar (sentiment prediction)
             - Sequence (translation)
-          </textarea>
+
+            ---
+
+            ## Tokenization
+
+            Split text into units from a *dictionary*
+
+            Words as units?
+            - Dictionary can't contain all possible words
+            
+            - Punctuation
+
+            - Versions of words are related (e.g., walk, walks, walked, walking)
+
+            ---
+
+            ## Solution
+            
+            Split into *tokens*
+            
+            - Sometimes full words
+
+            - Sometimes word fragments
+            
+          </Textarea>
         </section>
 
         <section>
@@ -257,21 +242,161 @@
 
             ---
 
-            ## Transformer language models
-            - Sequence $\rightarrow$ single output: *encoder*
+            ## Transformer language models (LLMs)
+            - *Encoder*: text sequence $\rightarrow$ single output
+            
+            Example: sentiment analysis
+            
+            - *Decoder*: Single input $\rightarrow$ text sequence
 
-            - Single input $\rightarrow$ sequence: *decoder*
+            Example: text generation
 
-            - Sequence $\rightarrow$ sequence: *encoder-decoder*
+            - *Encoder-decoder*: Sequence $\rightarrow$ sequence
 
+            Example: machine translation
+
+            ---
+            
+            ### Encoder
+            Sequence $\rightarrow$ single output (e.g., sentiment analysis)
+            
+            ### Decoder <!-- .element: class="fragment" data-fragment-index="2" -->
+            Single input $\rightarrow$ sequence (e.g., text generation) <!-- .element: class="fragment" data-fragment-index="2" -->
+
+            ### Encoder-decoder <!-- .element: class="fragment" data-fragment-index="3" -->
+            Sequence $\rightarrow$ sequence (e.g., machine translation) <!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+            
+            ## Encoders
+            Example: BERT (bidirectional encoder representations from transformers)
+
+            1. Self-supervised pre-training: Predict masked words from sentences<!-- .element: class="fragment" data-fragment-index="2" -->
+
+            2. Fine-tuning to specific task<!-- .element: class="fragment" data-fragment-index="3" -->
+            - Text classification (e.g., sentiment analysis)<!-- .element: class="fragment" data-fragment-index="3" -->
+            - Word classification (e.g., named entity recognition)<!-- .element: class="fragment" data-fragment-index="3" -->
+            - Text span prediction (e.g., question answering)<!-- .element: class="fragment" data-fragment-index="3" -->
+            
             ---
 
             ## Decoders
 
-            GPT: Generative Pretrained Transformer
+            Example: GPT3 (Generative Pretrained Transformer)
+
+            Autoregressive language model
+            <br>
+                        
+            ## Example<!-- .element: class="fragment" data-fragment-index="2" -->
+            $$\Pr(\text{I am fine}) = \Pr(\text{I}) \times \Pr(\text{am} \mid \text{I}) \times \Pr(\text{fine} \mid \text {I am})$$<!-- .element: class="fragment" data-fragment-index="2" -->
+            <br>
+
+            ## General formulation<!-- .element: class="fragment" data-fragment-index="3" -->
+            $$\Pr(t_1, t_2, \ldots, t_N) = \Pr(t_1) \prod_{n=2}^N \Pr(t_n \mid t_1, \ldots, t_{n-1})$$<!-- .element: class="fragment" data-fragment-index="3" -->
+
+            ---
+            ## Text generation with a decoder
+            - Input: first *n-1* tokens
+            - Output: predict *n<sup>th</sup>* token
             
+            Repeat to predict token *n+1*
+
+            ---
+
+            ## Training a decoder
+
+            - Pass whole sentence to transformer layer
+            
+            - Prevent cheating: *masked* self-attention
+              - Set attention weights to -∞ for tokens to the right
+
           </textarea>
         </section>
+
+        
+
+        <section>
+          <h2>Training a decoder</h2>
+          <p>
+            <span style="color: dodgerblue">Training input</span>
+            →
+            <span style="color: coral">Target value</span>
+          </p>
+          <div class="r-stack">
+            <div class="fragment">
+              "<span style="color: dodgerblue">I </span> <span style="color: coral">swam</span> <span style="color: gray">across the river to get to the other bank</span>"
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam </span> <span style="color: coral">across</span> <span style="color: gray">the river to get to the other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across</span> <span style="color: coral">the</span> <span style="color: gray">river to get to the other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the</span> <span style="color: coral">river</span> <span style="color: gray">to get to the other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river</span> <span style="color: coral">to</span> <span style="color: gray"> get to the other bank</span>
+            </div>
+
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river to</span> <span style="color: coral">get</span> <span style="color: gray"> to the other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river to get </span> <span style="color: coral">to</span> <span style="color: gray"> the other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river to get to </span> <span style="color: coral">the</span> <span style="color: gray"> other bank</span>
+            </div>
+            
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river to get to the</span> <span style="color: coral">other</span> <span style="color: gray"> bank</span>
+            </div>
+
+            <div class="fragment">
+              <span style="color: dodgerblue">I swam across the river to get to the other</span> <span style="color: coral">bank</span>
+            </div>
+          </div>
+        </section>
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Structure of GPT3
+
+            - Sequence length: 2,048 tokens
+
+            - Batch size: 3.2m tokens
+
+            - 96 transformer layers
+            
+            - 96 self-attention heads in each layer
+
+            - Word embedding size: 12,228
+
+            - Trained on 300 billion tokens
+
+            - 175 billion parameters
+            
+            ---
+            
+            ## Encoder-decoder
+            Machine translation
+            - Input: sentence in English
+            - Output: sentence in Swedish
+
+            Training:
+            - Masked self-attention on output
+            - Full attention on input
+          </textarea>
+        </section>
+
+            
 
         <section>
           <h2>Dot-product self-attention</h2>

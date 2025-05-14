@@ -163,6 +163,116 @@
 
         
 
+        <section data-markdown>
+          <textarea data-template>
+            ## Attention
+            "I swam across the river to get to the other bank"
+
+            "I walked across the road to get cash from the bank"
+          </textarea>
+        </section>
+
+        
+
+        <section>
+          <h2>Attention</h2>
+          <img data-src="figures/typst/attention_example.svg">
+          <ul>
+            <li>Interpretation depends on context</li>
+            <li>Attention is sequence-specific</li>
+          </ul>
+        </section>
+
+        
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Input
+            Sequence of *N* words $\lbrace x_n \rbrace$
+            
+            Each word represented as a *vector* of dimension *D*
+
+            ## Output
+            Sequence of *N* words $\lbrace y_n \rbrace$
+
+            ---
+
+            ## Attention
+
+            Each output $y_n$ should depend on *all* inputs $x_1, \ldots, x_N$
+
+            $$y_n = \sum_{m=1}^N a_{nm} x_m$$
+
+            $a_{nm}$: *attention weights*
+            - Non-negative
+            - Sum to one
+
+            ---
+
+            ## Self-attention
+            For each word $x_m$, define linear transformations
+            - *Value*: word $x_n$
+            - *Key*: relevant aspects of $x_n$
+            - *Query*: relevant aspects of $x_m$
+
+            For each $m$, weight *values* by similarity between *keys* and *query*
+
+            Weights are scaled by *softmax* function
+
+            $$a_{nm} = \frac{\exp(x_n \cdot x_m)}{\sum_{m^\prime=1}^N \exp(x_n \cdot x_{m^\prime})}$$
+
+
+            ---
+
+            ## Multi-head attention
+
+            Use multiple attention *heads* in parallel
+            - Identical structure, separate parameters
+            - Learn different aspects of language
+
+            ---
+            
+            ## Transformer layer
+            Multi-head attention $\rightarrow$ by multilayer perceptron
+            
+            Stack multiple transformer layers
+
+            ---
+
+            ## Positional encoding
+
+            Transformer *equivariant*:
+            
+            Permutation of inputs $\rightarrow$ same permutation of outputs
+
+            But word order is important!
+
+            RNN encode order in network architecture
+            - Hard to parallelize
+
+            ---
+            Transformers encode order in *data*
+
+            Add *positional* embedding vector to input vector: $\tilde{x}_n = x_n + r_n$
+
+            ---
+
+            ## Transformer language models
+            - Sequence $\rightarrow$ single output: *encoder*
+
+            - Single input $\rightarrow$ sequence: *decoder*
+
+            - Sequence $\rightarrow$ sequence: *encoder-decoder*
+
+            ---
+
+            ## Decoders
+
+            GPT: Generative Pretrained Transformer
+            
+          </textarea>
+        </section>
+
         <section>
           <h2>Dot-product self-attention</h2>
           <img data-src="figures/typst/attention.svg" style="height: 45vh">

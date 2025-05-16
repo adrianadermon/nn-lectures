@@ -314,6 +314,12 @@
           </textarea>
         </section>
         
+        <section>
+          <!-- <figure> -->
+            <img data-src="./figures/francis_224x224.jpg"  style="height: 50vh; image-rendering: pixelated">
+          <!-- </figure> -->
+          <!-- <figcaption>224x224 pixels</figcaption> -->
+        </section>
         
         <section data-markdown>
           <textarea data-template>
@@ -322,15 +328,48 @@
             - High-dimensional inputs (224x224 RGB pixels = 150,528 dimensions)
             - Spatial information relevant
             - Transformations of image change inputs
+
+            ---
+
+            ## Convolutional neural networks
+            - Recognizes local *features* in images
+            
+            - Local features combined to create compound features
+
+            - *Convolution layers* built up of *convolution filters*
+
+            - *Weight sharing*: much fewer parameters than *fully connected* network
           </textarea>
         </section>
 
         <section>
-          <figure>
-            <img data-src="./figures/francis_224x224.jpg"  style="height: 40vh">
-          </figure>
-          <figcaption>224x224 pixels</figcaption>
+          <h2>Image data as matrix</h2>
+
+          <img data-src="./figures/conv_example/smiley_large_0.png">
+          <span style="font-size: 16pt">
+          \[
+          \tiny
+          \begin{bmatrix} 
+          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
+          1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
+          1 & 1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 & 1 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
+          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
+          1 & 0.24 & 1 & 1 & 1 & 0.04 & 0.04 & 0.04 & 0.04 & 1 & 1 & 1 & 0.24 & 1 \\ 
+          1 & 0.24 & 0.93 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.93 & 0.24 & 1 \\ 
+          1 & 1 & 0.24 & 0.93 & 0.93 & 1 & 1 & 1 & 1 & 0.93 & 0.93 & 0.24 & 1 & 1 \\ 
+          1 & 1 & 1 & 0.24 & 0.24 & 0.93 & 0.93 & 0.93 & 0.93 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
+          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
+          \end{bmatrix}
+          \]
+          </span>
         </section>
+
+
         
         <section>
           <style>
@@ -377,33 +416,6 @@
         </section>
 
         
-        <section>
-          <h2>Image data as matrix</h2>
-
-          <img data-src="./figures/conv_example/smiley_large_0.png">
-          <span style="font-size: 16pt">
-          \[
-          \tiny
-          \begin{bmatrix} 
-          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
-          1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
-          1 & 1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 & 1 \\ 
-          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
-          1 & 0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 & 1 \\ 
-          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
-          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
-          0.24 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.24 \\ 
-          0.24 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 1 & 0.04 & 1 & 1 & 1 & 0.24 \\ 
-          1 & 0.24 & 1 & 1 & 1 & 0.04 & 0.04 & 0.04 & 0.04 & 1 & 1 & 1 & 0.24 & 1 \\ 
-          1 & 0.24 & 0.93 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 1 & 0.93 & 0.24 & 1 \\ 
-          1 & 1 & 0.24 & 0.93 & 0.93 & 1 & 1 & 1 & 1 & 0.93 & 0.93 & 0.24 & 1 & 1 \\ 
-          1 & 1 & 1 & 0.24 & 0.24 & 0.93 & 0.93 & 0.93 & 0.93 & 0.24 & 0.24 & 1 & 1 & 1 \\ 
-          1 & 1 & 1 & 1 & 1 & 0.24 & 0.24 & 0.24 & 0.24 & 1 & 1 & 1 & 1 & 1 \\ 
-          \end{bmatrix}
-          \]
-          </span>
-        </section>
-
         <!-- <section> -->
         <!--   <style> -->
         <!--     .wrapper-conv{ -->
@@ -644,6 +656,23 @@
             VGG-16
           </h2>
             <img data-src="./figures/vgg16.png" style="width: 70vw">
+        </section>
+
+
+        
+
+        <section data-markdown>
+          <textarea data-template>
+            ## Double descent
+            - Bias-variance trade-off
+
+            - As model complexity ↑
+              - Training error → 0
+              - Test error ↓, then ↑
+              - ...then ↑ again1
+
+            - *Double descent*
+          </textarea>
         </section>
 
       </div>

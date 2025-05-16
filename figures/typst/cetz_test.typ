@@ -13,22 +13,22 @@
         )
 
         // Function to draw a box with given dimensions
-        let box(x, y, z, width: 1, height: 1, depth: 1) = {
+        let box(x, y, z, width: 1, height: 1, depth: 1, trans: 50%, xycol: green, xzcol: blue, yzcol: red) = {
                 on-xy({
-                    rect((x, y), (x + width, y + height), fill: green.transparentize(50%))
+                    rect((x, y), (x + width, y + height), fill: xycol.transparentize(trans), stroke: (join: "round"))
                 }, z: z)
                 on-xy({
                     line((x, y), (x, y + height), stroke: (dash: "dashed"))
                     line((x, y), (x + width, y), stroke: (dash: "dashed"))
                 }, z: z - depth)
                 on-xz({
-                    rect((x, z), (x + width, z - depth), fill: blue.transparentize(50%))
+                    rect((x, z), (x + width, z - depth), fill: xzcol.transparentize(trans), stroke: (join: "round"))
                 }, y: y + height)
                 on-xz({
                     line((x, z), (x, z - depth), stroke: (dash: "dashed"))
                 }, y: y)
                 on-yz({ // Wrong order of arguments, marked as a bug that will be fixed at some point
-                    rect((z, y), (z - depth, y + height), fill: red.transparentize(50%))
+                    rect((z, y), (z - depth, y + height), fill: yzcol.transparentize(trans), stroke: (join: "round"))
                 }, x: x + width)
         }
 
@@ -37,13 +37,13 @@
             x: 20deg,
             {
                 box(0, 0, 0,
-                    width: 0.4, height: 0.5)
+                    width: 0.4, height: 0.5, trans: 0%, yzcol: aqua)
                 box(1, 0.2, 0,
-                    width: 0.3, height: 0.3, depth: 0.3)
+                    width: 0.3, height: 0.3, depth: 0.3, trans: 90%)
                 box(2, 0, 0,
                     width: 0.2)
                 box(1, 1, 1,
-                    width: 0.3, height: 0.3, depth: 0.3)
+                    width: 0.3, height: 0.3, depth: 0.3, xycol: orange)
                 on-yz({
                     line((0.15, 0), (0.02, 0), mark: (end: "straight"))
                 }, x: 0.2)

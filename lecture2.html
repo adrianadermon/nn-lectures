@@ -55,13 +55,13 @@
             *Word2vec*
             Simple neural network
             
-            - Input: short sequences of text (e.g., five words) <!-- .element: class="fragment" data-fragment-index="1" -->
+            - <!-- .element: class="fragment" data-fragment-index="1" --> Input: short sequences of text (e.g., five words) 
             
-            - Self-supervised: <!-- .element: class="fragment" data-fragment-index="2" -->
-              - Predict middle word (continuous bag of words) <!-- .element: class="fragment" data-fragment-index="2" -->
-              - Predict surrounding words (skip-gram) <!-- .element: class="fragment" data-fragment-index="2" -->
+            - <!-- .element: class="fragment" data-fragment-index="2" --> Self-supervised: 
+              - Predict middle word (continuous bag of words)
+              - Predict surrounding words (skip-gram)
 
-            - Output: word embedding vectors <!-- .element: class="fragment" data-fragment-index="3" -->
+            - <!-- .element: class="fragment" data-fragment-index="3" --> Output: word embedding vectors 
 
             ---
 
@@ -106,7 +106,15 @@
             - Sometimes full words
 
             - Sometimes word fragments
-            
+
+            ---
+
+            ## Recurrent neural networks
+
+            - How to deal with sequential structure?
+
+            - Add memory to network using *hidden state*
+              + *Recurrent unit* uses previous output as current input
           </Textarea>
         </section>
 
@@ -126,11 +134,17 @@
           $$O_\ell = \beta_0 + \sum_{k=1}^K \beta_k A_{\ell k}$$
         </section>
 
-        <section>
-          <h2>Recurrent neural network</h2>
-          
-        </section>
+        
 
+        <section data-markdown>
+          <textarea data-template>
+            ## Limitations of RNNs
+
+            - Bad long-term memory (but solutions exist: LSTM)
+
+            - Sequential → hard to parallelize
+          </textarea>
+        </section>
         
 
         <section>
@@ -218,7 +232,7 @@
             ---
             
             ## Transformer layer
-            Multi-head attention $\rightarrow$ by multilayer perceptron
+            Multi-head attention $\rightarrow$ multilayer perceptron
             
             Stack multiple transformer layers
 
@@ -243,7 +257,7 @@
             ---
 
             ## Transformer language models (LLMs)
-            - *Encoder*: text sequence $\rightarrow$ single output
+            -  *Encoder*: text sequence $\rightarrow$ single output
             
             Example: sentiment analysis
             

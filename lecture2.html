@@ -36,7 +36,7 @@
 
             - Statistical models work with numbers
             
-            - Text $\Rightarrow$ numerical data? 
+            - Text → numerical data? 
             
             ---
             
@@ -52,7 +52,16 @@
             
             ## Word embeddings
 
-            *Word2vec*
+            - Encode each word as a vector of continuous values
+
+            - <!-- .element: class="fragment" data-fragment-index="2" --> One-hot encoded input → word embedding
+
+            - <!-- .element: class="fragment" data-fragment-index="3" --> Embeddings learned from data
+            
+            ---
+            
+            ## Word2vec
+            
             Simple neural network
             
             - <!-- .element: class="fragment" data-fragment-index="1" --> Input: short sequences of text (e.g., five words) 
@@ -107,6 +116,19 @@
 
             - Sometimes word fragments
 
+            ---
+
+            ## Example
+            <div class="r-stack">
+              <div>
+            <!-- .element: class="fragment" data-fragment-index="1" -->
+            "Isn't Uppsala nice in the spring?" 
+            </div>
+            <div>
+             <!-- .element: class="fragment" data-fragment-index="2" -->
+            "<span style="background-color:lightcoral">Is</span><span style="background-color:lightgreen">n't</span><span style="background-color:lightskyblue"> U</span><span style="background-color:lightcoral">pps</span><span style="background-color:lightgreen">ala</span><span style="background-color:lightskyblue"> nice</span><span style="background-color:lightcoral"> in</span><span style="background-color:lightgreen"> the</span><span style="background-color:lightskyblue"> spring</span><span style="background-color:lightcoral">?</span>" 
+            </div>
+            </div>
             ---
 
             ## Recurrent neural networks
@@ -210,19 +232,34 @@
 
             ## Self-attention
             For each word $x_m$, define linear transformations
-            - *Value*: word $x_n$
-            - *Key*: relevant aspects of $x_n$
-            - *Query*: relevant aspects of $x_m$
+            - *Value* $v_n$: word $x_n$
+            - *Query* $q_n$: relevant aspects of $x_n$
+            - *Key* $k_m$: relevant aspects of $x_m$
 
-            For each $m$, weight *values* by similarity between *keys* and *query*
-
-            Weights are scaled by *softmax* function
-
-            $$a_{nm} = \frac{\exp(x_n \cdot x_m)}{\sum_{m^\prime=1}^N \exp(x_n \cdot x_{m^\prime})}$$
-
+            For each $m$, weight *values* by similarity between *query* and *keys*
 
             ---
 
+            
+            Weights are scaled by *softmax* function
+
+            $$a_{nm} = \frac{\exp(q_n \cdot k_m)}{\sum_{m^\prime=1}^N \exp(q_n \cdot k_{m^\prime})}$$
+
+            *Self-attention*: weighted sum of values
+
+            $$ sa_n[x_1, \ldots, x_N] = \sum_{m=1}^N a[x_m, x_n] v_m$$
+          </textarea>
+        </section>
+
+        <section>
+          <h2>Dot-product self-attention</h2>
+          <img data-src="figures/typst/attention.svg" style="height: 45vh">
+        </section>
+
+        
+
+        <section data-markdown>
+          <textarea data-template>
             ## Multi-head attention
 
             Use multiple attention *heads* in parallel
@@ -257,31 +294,20 @@
             ---
 
             ## Transformer language models (LLMs)
-            -  *Encoder*: text sequence $\rightarrow$ single output
+            - *Encoder*: text sequence → single output
             
             Example: sentiment analysis
             
-            - *Decoder*: Single input $\rightarrow$ text sequence
+            - *Decoder*: Single input → text sequence
 
             Example: text generation
 
-            - *Encoder-decoder*: Sequence $\rightarrow$ sequence
+            - *Encoder-decoder*: Sequence → sequence
 
             Example: machine translation
 
             ---
-            
-            ### Encoder
-            Sequence $\rightarrow$ single output (e.g., sentiment analysis)
-            
-            ### Decoder <!-- .element: class="fragment" data-fragment-index="2" -->
-            Single input $\rightarrow$ sequence (e.g., text generation) <!-- .element: class="fragment" data-fragment-index="2" -->
 
-            ### Encoder-decoder <!-- .element: class="fragment" data-fragment-index="3" -->
-            Sequence $\rightarrow$ sequence (e.g., machine translation) <!-- .element: class="fragment" data-fragment-index="3" -->
-
-            ---
-            
             ## Encoders
             Example: BERT (bidirectional encoder representations from transformers)
 
@@ -407,43 +433,52 @@
             Training:
             - Masked self-attention on output
             - Full attention on input
+
+            ---
+            
+            ## Large language models
+
+            *Large* refers to number of parameters
+
+            - GPT-1 (2018): 117 million
+            - GPT-2 (2019): 1,5 billion
+            - GPT-3 (2020): 175 billion
+            - GPT-4 (2023): 1,76 trillion?
+            - Llama 4 (2025): 400 billion
+            - LLama 4 Behemoth (?): 2 trillion
           </textarea>
         </section>
 
             
 
-        <section>
-          <h2>Dot-product self-attention</h2>
-          <img data-src="figures/typst/attention.svg" style="height: 45vh">
-        </section>
         
-        <section data-markdown>
-          <textarea data-template>
-            $$
-            \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix}
-            \begin{bmatrix} w_{11} & w_{12} \\\\ w_{21} & w_{22} \\\\ w_{31} & w_{32} \end{bmatrix} =
-            \begin{bmatrix}
-            \sum_{i=1}^3 x_i w_{i1} &
-            \sum_{i=1}^3 x_i w_{i2} 
-            \end{bmatrix}
-            $$
-          </textarea>
-        </section>
+        <!-- <section data-markdown> -->
+        <!--   <textarea data-template> -->
+        <!--     $$ -->
+        <!--     \begin{bmatrix} x_1 & x_2 & x_3 \end{bmatrix} -->
+        <!--     \begin{bmatrix} w_{11} & w_{12} \\\\ w_{21} & w_{22} \\\\ w_{31} & w_{32} \end{bmatrix} = -->
+        <!--     \begin{bmatrix} -->
+        <!--     \sum_{i=1}^3 x_i w_{i1} & -->
+        <!--     \sum_{i=1}^3 x_i w_{i2}  -->
+        <!--     \end{bmatrix} -->
+        <!--     $$ -->
+        <!--   </textarea> -->
+        <!-- </section> -->
 
-        <section>
-          <h2>Long-distance attention</h2>
-          <img data-src="./figures/papers/attention_fig3.svg" style="width: 80vw">
-        </section>
+        <!-- <section> -->
+        <!--   <h2>Long-distance attention</h2> -->
+        <!--   <img data-src="./figures/papers/attention_fig3.svg" style="width: 80vw"> -->
+        <!-- </section> -->
         
-        <section>
-          <h2>Two attention heads</h2>
-          <img data-src="./figures/papers/attention_fig4.svg" style="height: 50vh; transform: rotate(90deg)">
-        </section>
+        <!-- <section> -->
+        <!--   <h2>Two attention heads</h2> -->
+        <!--   <img data-src="./figures/papers/attention_fig4.svg" style="height: 50vh; transform: rotate(90deg)"> -->
+        <!-- </section> -->
         
-        <section>
-          <h2>Heads specialize</h2>
-          <img data-src="./figures/papers/attention_fig5.svg" style="height: 50vh; transform: rotate(90deg)">
-        </section>
+        <!-- <section> -->
+        <!--   <h2>Heads specialize</h2> -->
+        <!--   <img data-src="./figures/papers/attention_fig5.svg" style="height: 50vh; transform: rotate(90deg)"> -->
+        <!-- </section> -->
 
       </div>
     </div>

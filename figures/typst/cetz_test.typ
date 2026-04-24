@@ -3,7 +3,7 @@
 #set page(width: auto, height: auto, margin: .5cm, fill: none)
 
 
-#import "@preview/cetz:0.3.4"
+#import "@preview/cetz:0.4.2"
 #cetz.canvas(
     length: 10cm,
     {
@@ -79,6 +79,9 @@
                     width: 3/50, height: 224/200, depth: 224/200, trans: 0%)
                 box(10/50, 101/200, 0,
                     width: 3/50, height: 112/200, depth: 112/200, trans: 0%)
+                box(14/50, 101/200, 0,
+                    width: 3/50, height: 112/200, depth: 112/200, trans: 0%)
+                on-xz(line((-.1, 0), (1, 0)))
             })
     })
 
